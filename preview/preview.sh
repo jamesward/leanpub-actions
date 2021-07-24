@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "generating preview"
+echo "generating preview for $INPUT_SLUG"
 gen=$(curl -s -d "api_key=$INPUT_APIKEY" https://leanpub.com/$INPUT_SLUG/preview.json | jq -r '.success')
 
 if [[ $gen != "true" ]]; then

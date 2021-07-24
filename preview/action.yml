@@ -10,10 +10,12 @@ inputs:
 outputs:
   pdf_url:
     description: 'URL to the PDF'
+    value: ${{ steps.preview.outputs.pdf_url }}
 runs:
   using: 'composite'
   steps:
-    - run: ${{ github.action_path }}/preview.sh
+    - id: preview
+      run: ${{ github.action_path }}/preview.sh
       shell: bash
       env:
         INPUT_APIKEY: ${{ inputs.apikey }}

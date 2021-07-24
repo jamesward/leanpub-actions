@@ -13,5 +13,5 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - run: ./preview.sh
+    - run: ${{ github.action_path }}/preview.sh
       shell: bash

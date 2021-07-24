@@ -24,6 +24,5 @@ until [ $(curl -s https://leanpub.com/$INPUT_SLUG/job_status.json?api_key=$INPUT
 done
 
 pdfUrl=$(curl -s https://leanpub.com/$INPUT_SLUG.json?api_key=$INPUT_APIKEY | jq -r '.pdf_preview_url')
-echo "preview created: $pdfUrl"
 
 echo "::set-output name=pdf_url::$pdfUrl"

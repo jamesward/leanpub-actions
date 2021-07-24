@@ -15,3 +15,6 @@ runs:
   steps:
     - run: ${{ github.action_path }}/preview.sh
       shell: bash
+      env:
+        INPUT_APIKEY: ${{ inputs.apikey }}
+        INPUT_SLUG: ${{ inputs.slug }}

@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [[ -z "${INPUT_APIKEY}" ]]; then
+  echo "INPUT_APIKEY env var not set"
+  exit 1
+fi
+
+if [[ -z "${INPUT_SLUG}" ]]; then
+  echo "INPUT_SLUG env var not set"
+  exit 1
+fi
+
 echo "generating preview for $INPUT_SLUG"
 gen=$(curl -s -d "api_key=$INPUT_APIKEY" https://leanpub.com/$INPUT_SLUG/preview.json | jq -r '.success')
 

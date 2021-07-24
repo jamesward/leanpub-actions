@@ -1,17 +1,17 @@
 name: 'Create Leanpub Preview'
 description: 'Triggers the build of a new preview and waits until it is ready'
+inputs:
+  apikey:
+    description: 'Leanpub API Key'
+    required: true
+  slug:
+    description: 'Leanpub Book Slug'
+    required: true
+outputs:
+  pdf_url:
+    description: 'URL to the PDF'
 runs:
   using: 'composite'
-  inputs:
-    apikey:
-      description: 'Leanpub API Key'
-      required: true
-    slug:
-      description: 'Leanpub Book Slug'
-      required: true
-  outputs:
-    pdf_url:
-      description: 'URL to the PDF'
   steps:
     - run: ./preview.sh
       shell: bash

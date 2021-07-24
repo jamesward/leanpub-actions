@@ -15,4 +15,4 @@ done
 
 pdfUrl=$(curl -s https://leanpub.com/$INPUT_SLUG.json?api_key=$INPUT_APIKEY | jq -r '.pdf_preview_url')
 
-echo "::set-output name=pdfUrl::$pdfUrl"
+echo "::set-output name=pdf_url::$pdfUrl"

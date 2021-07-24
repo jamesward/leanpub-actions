@@ -10,7 +10,7 @@ runs:
       description: 'Leanpub Book Slug'
       required: true
   outputs:
-    pdfUrl:
+    pdf_url:
       description: 'URL to the PDF'
   steps:
     - run: ./preview.sh

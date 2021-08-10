@@ -11,6 +11,9 @@ outputs:
   pdf_url:
     description: 'URL to the PDF'
     value: ${{ steps.preview.outputs.pdf_url }}
+  epub_url:
+    description: 'URL to the EPUB'
+    value: ${{ steps.preview.outputs.epub_url }}
 runs:
   using: 'composite'
   steps:

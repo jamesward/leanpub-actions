@@ -23,6 +23,9 @@ until [ $(curl -s https://leanpub.com/$INPUT_SLUG/job_status.json?api_key=$INPUT
   sleep 10
 done
 
-pdfUrl=$(curl -s https://leanpub.com/$INPUT_SLUG.json?api_key=$INPUT_APIKEY | jq -r '.pdf_preview_url')
+json=$(curl -s https://leanpub.com/$INPUT_SLUG.json?api_key=$INPUT_APIKEY)
+pdfUrl=$(echo $json | jq -r '.pdf_preview_url')
+epubUrl=$(echo $json | jq -r '.epub_preview_url')
 
 echo "::set-output name=pdf_url::$pdfUrl"
+echo "::set-output name=epub_url::$epubUrl"

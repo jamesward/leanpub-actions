@@ -7,6 +7,9 @@ inputs:
   slug:
     description: 'Leanpub Book Slug'
     required: true
+  releasenotes:
+    description: 'Setting the release notes will notify readers of the new version'
+    required: false
 outputs:
   pdf_url:
     description: 'URL to the PDF'
@@ -23,3 +26,4 @@ runs:
       env:
         INPUT_APIKEY: ${{ inputs.apikey }}
         INPUT_SLUG: ${{ inputs.slug }}
+        INPUT_RELEASE_NOTES: ${{ inputs.releasenotes }}

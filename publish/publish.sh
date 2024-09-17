@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [[ -z "${INPUT_APIKEY}" ]]; then
   echo "INPUT_APIKEY env var not set"
@@ -11,11 +11,18 @@ if [[ -z "${INPUT_SLUG}" ]]; then
 fi
 
 echo "generating publish for $INPUT_SLUG"
-gen=$(curl -s -d "api_key=$INPUT_APIKEY" -d "publish[email_readers]=true" -d "publish[release_notes]=New+Release" https://leanpub.com/$INPUT_SLUG/publish.json | jq -r '.success')
 
-# todo: display error
-if [[ $gen != "true" ]]; then
+if [[ -n "${INPUT_RELEASE_NOTES}" ]]; then
+  publish_data="-d \"publish[email_readers]=true\" -d \"publish[release_notes]=${INPUT_RELEASE_NOTES}\""
+fi
+
+curl_cmd="curl -s -d \"api_key=${INPUT_APIKEY}\" $publish_data https://leanpub.com/${INPUT_SLUG}/publish.json"
+
+gen=$(eval $curl_cmd)
+
+if [[ $(echo "$gen" | jq 'has("success")') != "true" ]]; then
   echo "error generating publish"
+  echo "$gen"
   exit 1
 fi
 

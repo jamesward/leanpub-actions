@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ -z "${INPUT_APIKEY}" ]]; then
   echo "INPUT_APIKEY env var not set"

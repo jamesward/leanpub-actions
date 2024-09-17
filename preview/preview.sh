@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ -z "${INPUT_APIKEY}" ]]; then
   echo "INPUT_APIKEY env var not set"
@@ -11,10 +11,11 @@ if [[ -z "${INPUT_SLUG}" ]]; then
 fi
 
 echo "generating preview for $INPUT_SLUG"
-gen=$(curl -s -d "api_key=$INPUT_APIKEY" https://leanpub.com/$INPUT_SLUG/preview.json | jq -r '.success')
+gen=$(curl -s -d "api_key=$INPUT_APIKEY" https://leanpub.com/$INPUT_SLUG/preview.json)
 
-if [[ $gen != "true" ]]; then
-  echo "error generating preview"
+if [[ $(echo "$gen" | jq 'has("success")') != "true" ]]; then
+  echo "error generating publish"
+  echo "$gen"
   exit 1
 fi
 

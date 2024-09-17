@@ -1,0 +1,25 @@
+name: 'Create Leanpub Publish'
+description: 'Triggers the build of a new publish and waits until it is ready'
+inputs:
+  apikey:
+    description: 'Leanpub API Key'
+    required: true
+  slug:
+    description: 'Leanpub Book Slug'
+    required: true
+outputs:
+  pdf_url:
+    description: 'URL to the PDF'
+    value: ${{ steps.publish.outputs.pdf_url }}
+  epub_url:
+    description: 'URL to the EPUB'
+    value: ${{ steps.publish.outputs.epub_url }}
+runs:
+  using: 'composite'
+  steps:
+    - id: publish
+      run: ${{ github.action_path }}/publish.sh
+      shell: bash
+      env:
+        INPUT_APIKEY: ${{ inputs.apikey }}
+        INPUT_SLUG: ${{ inputs.slug }}

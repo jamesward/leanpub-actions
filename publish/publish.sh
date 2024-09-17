@@ -10,10 +10,10 @@ if [[ -z "${INPUT_SLUG}" ]]; then
   exit 1
 fi
 
-# curl -d "api_key=YOUR_API_KEY" -d "publish[email_readers]=true" -d "publish[release_notes]=please+let+me+know+what+you+think" https://leanpub.com/SLUG/publish.json
 echo "generating publish for $INPUT_SLUG"
-gen=$(curl -s -d "api_key=$INPUT_APIKEY" -d "publish[email_readers]=true" https://leanpub.com/$INPUT_SLUG/publish.json | jq -r '.success')
+gen=$(curl -s -d "api_key=$INPUT_APIKEY" -d "publish[email_readers]=true" -d "publish[release_notes]=New+Release" https://leanpub.com/$INPUT_SLUG/publish.json | jq -r '.success')
 
+# todo: display error
 if [[ $gen != "true" ]]; then
   echo "error generating publish"
   exit 1

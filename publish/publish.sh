@@ -35,5 +35,5 @@ json=$(curl -s https://leanpub.com/$INPUT_SLUG.json?api_key=$INPUT_APIKEY)
 pdfUrl=$(echo $json | jq -r '.pdf_published_url')
 epubUrl=$(echo $json | jq -r '.epub_published_url')
 
-echo "::set-output name=pdf_url::$pdfUrl"
-echo "::set-output name=epub_url::$epubUrl"
+echo "pdf_url=$pdfUrl" >> $GITHUB_OUTPUT
+echo "epub_url=$epubUrl" >> $GITHUB_OUTPUT

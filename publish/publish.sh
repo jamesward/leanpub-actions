@@ -27,7 +27,7 @@ if [[ $(echo "$gen" | jq 'has("success")') != "true" ]]; then
 fi
 
 echo "waiting for publish to be available"
-until [ $(curl -s https://leanpub.com/$INPUT_SLUG/job_status.json?api_key=$INPUT_APIKEY | jq -r '.status') == "complete" ]; do
+until [ "$(curl -s https://leanpub.com/$INPUT_SLUG/job_status.json?api_key=$INPUT_APIKEY | jq -c .)" == "{}" ]; do
   sleep 10
 done
 
